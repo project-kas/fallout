@@ -195,20 +195,25 @@
     const btncancel = document.getElementById('cancel');
     btncancel.addEventListener('click', canceldata);
 
-    function canceldata(){
+    function canceldata() {
         event.preventDefault();
 
         const dtb = document.getElementById('database');
 
         const database = JSON.parse(localStorage.getItem('details'));
 
-        if(!database || !database.length){
+        if (!database || !database.length) {
             span.innerText = '';
             dtb.innerText = 'Empty Database!';
         }
-        else{
-            localStorage.removeItem('details');
-            location.href = 'index.html';
+        else {
+            if (confirm('This action will erase entire Database! Proceed?')) {
+                localStorage.removeItem('details');
+                location.href = 'index.html';
+            }
+            else {
+                location.href = 'index.html';
+            }
         }
     };
 
