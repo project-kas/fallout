@@ -193,7 +193,7 @@
     btncancel.addEventListener('click', canceldata);
 
     function canceldata(){
-        localStorage.removeItem('details');
+        localStorage.removeItem('details') || [];
     }
 
     const details = JSON.parse(localStorage.getItem('details')) || [];
