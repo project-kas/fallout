@@ -52,17 +52,29 @@
             border-radius: 10px;
             text-align: center;
         }
-        span{
+
+        span {
             color: red;
         }
 
         input,
-        select,
+        select {
+            padding: 2%;
+            margin: 2%;
+            border: none;
+            border-radius: 20px;
+        }
+
         button {
             padding: 2%;
             margin: 2%;
             border: none;
             border-radius: 20px;
+            width: 50%;
+        }
+
+        #btn {
+            display: flex;
         }
 
         button:hover {
@@ -101,7 +113,7 @@
         <div class="form">
             <form>
                 <h3>-booking_details--</h3>
-                 <span id="span"></span>
+                <span id="span"></span>
                 <input type="text" placeholder="First_Name" id="fname">
                 <input type="text" placeholder="Middle_Name" id="mname">
                 <input type="text" placeholder="Last_Name" id="lname">
@@ -117,8 +129,10 @@
                     <option value="YES">YES</option>
                     <option value="NO">NO</option>
                 </select>
-               
-                <button type="submit" id="submit">Reserve Room</button>
+                <div id="btn">
+                    <button type="submit" id="submit">Reserve Room</button>
+                    <button type="submit" id="cancel">Cancel Reservations</button>
+                </div>
             </form>
         </div>
         <div class="table">
@@ -175,6 +189,13 @@
             span.innerText = 'Empty Field(s)!';
         }
     };
+    const btncancel = document.getElementById('cancel');
+    btncancel.addEventListener('click', canceldata);
+
+    function canceldata(){
+        localStorage.removeItem('details');
+    }
+
     const details = JSON.parse(localStorage.getItem('details')) || [];
 
     const addDetails = (name, idnum, rtype, rservice) => {
@@ -185,7 +206,7 @@
             rservice
         });
         localStorage.setItem('details', JSON.stringify(details));
-        location.href = 'index.html';
+        location.href = 'home.html';
         return { name, idnum, rtype, rservice };
     };
 </script>
