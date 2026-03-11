@@ -143,6 +143,7 @@
                     <th>Room_Type</th>
                     <th>Room_Service</th>
                 </tr>
+                <span id="database"></span>
             </table>
         </div>
     </div>
@@ -175,6 +176,7 @@
         const rservice = document.getElementById('rservice').value;
         const name = fname + ' ' + mname + ' ' + lname;
         const span = document.getElementById('span');
+        const dtb = document.getElementById('database');
 
         if (fname && lname && idnum && rtype && rservice != '') {
             const newDetails = addDetails(
@@ -186,6 +188,7 @@
 
         }
         else {
+            dtb.innerText = '';
             span.innerText = 'Empty Field(s)!';
         }
     };
@@ -193,8 +196,21 @@
     btncancel.addEventListener('click', canceldata);
 
     function canceldata(){
-        localStorage.removeItem('details') || [];
-    }
+        event.preventDefault();
+
+        const dtb = document.getElementById('database');
+
+        const database = JSON.parse(localStorage.getItem('details'));
+
+        if(!database || !database.length){
+            span.innerText = '';
+            dtb.innerText = 'Empty Database!';
+        }
+        else{
+            localStorage.removeItem('details');
+            location.href = 'index.html';
+        }
+    };
 
     const details = JSON.parse(localStorage.getItem('details')) || [];
 
